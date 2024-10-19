@@ -41,7 +41,7 @@ class Graph:
         else:
             print(f"El grafo no es conexo. Tiene {len(components)} componentes.")
             for i, component in enumerate(components):
-                print(f"Componente {i + 1} tiene {len(component)} vértices: {component}")
+                print(f"Componente {i + 1} tiene {len(component)} vértices: {len(component)}")
     
     # DFS modificado para recolectar todos los vértices de una componente
     def __DFS_collect(self, u: int, visit: List[bool], component: List[int]) -> None:
@@ -179,44 +179,50 @@ class Graph:
 
         # Retornar el peso total del MST
         return mst_weight
-
-""" # Ejemplo dijkstra
-
-    def dijkstra(self, start_vertex_data):
-        start_vertex = self.vertex_data.index(start_vertex_data)
-        distances = [float('inf')] * self.n
-        distances[start_vertex] = 0
-        visited = [False] * self.n
-
-        for _ in range(self.n):
-            min_distance = float('inf')
-            u = None
-            for i in range(self.n):
-                if not visited[i] and distances[i] < min_distance:
-                    min_distance = distances[i]
-                    u = i
-
-            if u is None:
-                break
-
-            visited[u] = True
-
-            for v in range(self.n):
-                if self.adj_matrix[u][v] != 0 and not visited[v]:
-                    alt = distances[u] + self.adj_matrix[u][v]
-                    if alt < distances[v]:
-                        distances[v] = alt
-
-        return distances
-    
     def calcDistance(self,lat1,long1,lat2,long2): # Fórmula del Haversine
-        lat = lat2 - lat1
-        long = long2 - long1
-        a = math.sin(lat/2)**2 + math.cos(lat1)*math.cos(lat2)*(math.sin(long/2)**2)
-        c = 2*math.atan2(math.sqrt(a),math.sqrt(1-a))
-        d = self.R*c
-        return d
-"""
+            lat = lat2 - lat1
+            long = long2 - long1
+            a = math.sin(lat/2)**2 + math.cos(lat1)*math.cos(lat2)*(math.sin(long/2)**2)
+            c = 2*math.atan2(math.sqrt(a),math.sqrt(1-a))
+            d = self.R*c
+            return d
+
+    def dijkstra(self, v0):
+        D = [float("inf")] * self.n
+        pad = [None] * self.n
+        visit = [None] * self.n
+        D[v0] = 0
+
+        while not all(visit):
+            min_distance = float('inf')
+            v = None
+            for i in range(self.n):
+                if not visit[i] and D[i] < min_distance:
+                    min_distance = D[i]
+                    v = i
+            visit[v] = True
+
+            for j in self.L[v]:
+                i = j[0]
+                if not visit[i]:
+                    alt = D[v] + j[1]
+                    if alt < D[i]:
+                        D[i] = alt
+                        pad[i] = v
+
+            return D, pad
+    
+    def largestPath(self,v):
+        D, pad = self.dijkstra(v)
+        maxPaths = [(0,v)]
+        for i in D:
+            minOfMax = []
+            while len(maxPaths) > 0:
+                minOfMax.append(maxPaths.pop())
+                if i > minOfMax[0][0]:
+                    pass
+
+
 """
     # Crear un grafo con 5 nodos
 g = Graph(5)
@@ -229,7 +235,9 @@ g.add_edge(1, 3, 8.0)
 g.add_edge(1, 4, 5.0)
 g.add_edge(2, 4, 7.0)
 g.add_edge(3, 4, 9.0)
-# 
+print(g.dijkstra(0))
+"""
+"""# 
 # Calcular el peso del árbol de expansión mínima
 mst_weight = g.prim_mst()
 print(f"El peso del Árbol de Expansión Mínima es: {mst_weight}")

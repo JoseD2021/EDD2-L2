@@ -4,7 +4,7 @@
 1. Determinar si el grafo generado es conexo. En caso de no serlo determinar el número de componentes y la cantidad de vértices de cada una de ellas. (HECHO)
 2. Determinar el peso del árbol de expansión mínima. En caso de haber más de una componente determinar el peso del árbol de expansión mínima de cada una de las componentes. (TODAS las componentes)
 3. Dado un primer vértice por el código del aeropuerto o seleccionado mediante la interfaz gráfica: 
-	a) Mostrar la información correspondiente al aeropuerto (código, nombre, ciudad, país, latitud y longitud). 
+	a) Mostrar la información correspondiente al aeropuerto (código, nombre, ciudad, país, latitud y longitud). (HECHO)
 	b) Mostrar la información (código, nombre, ciudad, país, latitud y longitud) de los 10 aeropuertos cuyos caminos mínimos desde el vértice dado sean los más largos. Adicionalmente, se debe mostrar la distancia de los caminos. 
 4. Dado un segundo vértice por el código del aeropuerto o seleccionado mediante la interfaz gráfica: 
 	a) Mostrar el camino mínimo entre el primer y el segundo vértice sobre el mapa de la interfaz gráfica, pasando por cada uno de los vértices intermedios del camino. Para cada vértice intermedio se debe mostrar la información del aeropuerto (código, nombre, ciudad, país, latitud y longitud). 
