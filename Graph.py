@@ -2,6 +2,32 @@ from typing import List
 import heapq
 import math
 
+class DisjointSet:
+    def __init__(self, n):
+        # Inicializar el conjunto disjunto
+        self.parent = list(range(n))
+        self.rank = [0] * n
+
+    def find(self, u):
+        # Encontrar la raíz del conjunto del nodo u
+        if self.parent[u] != u:
+            self.parent[u] = self.find(self.parent[u])  # Compresión de caminos
+        return self.parent[u]
+
+    def union(self, u, v):
+        # Unir los conjuntos de u y v usando unión por rango
+        root_u = self.find(u)
+        root_v = self.find(v)
+
+        if root_u != root_v:
+            if self.rank[root_u] > self.rank[root_v]:
+                self.parent[root_v] = root_u
+            elif self.rank[root_u] < self.rank[root_v]:
+                self.parent[root_u] = root_v
+            else:
+                self.parent[root_v] = root_u
+                self.rank[root_u] += 1
+
 class Graph:
     R = 6378 #6371 # Radio promedio de la tierra, 6378 radio ecuatorial
     def __init__ (self, n: int, directed: bool = False):
@@ -253,9 +279,39 @@ class Graph:
         
         return maxPaths
     
+    def kruskal_mst(self):
+        # Lista para almacenar el MST
+        mst = []
+        mst_weight = 0
+
+        # Paso 1: Crear una lista de todas las aristas
+        edges = []
+        for u in range(self.n):
+            for v, weight in self.L[u]:
+                if u < v:  # Evitar duplicar aristas en grafos no dirigidos
+                    edges.append((weight, u, v))
+
+        # Paso 2: Ordenar las aristas por su peso
+        edges.sort()
+
+        # Paso 3: Crear una estructura de conjuntos disjuntos (Union-Find)
+        disjoint_set = DisjointSet(self.n)
+
+        # Paso 4: Recorrer las aristas ordenadas y agregar las que no formen ciclos
+        for weight, u, v in edges:
+            if disjoint_set.find(u) != disjoint_set.find(v):
+                # Añadir la arista al MST
+                mst.append((u, v, weight))
+                mst_weight += weight
+                # Unir los conjuntos de u y v
+                disjoint_set.union(u, v)
+
+        # Retornar el peso total del MST y las aristas que lo componen
+        return mst_weight, mst
+    
 
 """
-    # Crear un grafo con 5 nodos
+ # Crear un grafo con 5 nodos
 g = Graph(5)
 
 # Agregar aristas con pesos (u, v, peso)
@@ -268,7 +324,7 @@ g.add_edge(2, 4, 7.0)
 g.add_edge(3, 4, 9.0)
 print(g.dijkstra(0))
 """
-"""# 
+""" 
 # Calcular el peso del árbol de expansión mínima
 mst_weight = g.prim_mst()
 print(f"El peso del Árbol de Expansión Mínima es: {mst_weight}")
@@ -287,5 +343,23 @@ g.add_edge(3, 4, 5.0)
 
 # Determinar si el grafo es conexo y, si no lo es, el número de componentes
 g.connected_components()
-
 """
+#Prueba KRUSKAL
+
+g = Graph(5)
+
+# Agregar aristas con pesos (u, v, peso)
+g.add_edge(0, 1, 2.0)
+g.add_edge(0, 3, 6.0)
+g.add_edge(1, 2, 3.0)
+g.add_edge(1, 3, 8.0)
+g.add_edge(1, 4, 5.0)
+g.add_edge(2, 4, 7.0)
+g.add_edge(3, 4, 9.0)
+
+# Calcular el MST usando Kruskal
+mst_weight, mst = g.kruskal_mst()
+print(f"El peso del Árbol de Expansión Mínima es: {mst_weight}")
+print("Las aristas en el MST son:")
+for u, v, weight in mst:
+    print(f"{u} -- {v} (peso: {weight})")
