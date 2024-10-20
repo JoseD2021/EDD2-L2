@@ -284,20 +284,20 @@ class Graph:
         mst = []
         mst_weight = 0
 
-        # Paso 1: Crear una lista de todas las aristas
+        #Crear una lista de todas las aristas
         edges = []
         for u in range(self.n):
             for v, weight in self.L[u]:
                 if u < v:  # Evitar duplicar aristas en grafos no dirigidos
                     edges.append((weight, u, v))
 
-        # Paso 2: Ordenar las aristas por su peso
+        # Ordenar las aristas por su peso
         edges.sort()
 
-        # Paso 3: Crear una estructura de conjuntos disjuntos (Union-Find)
+        #  Crear una estructura de conjuntos disjuntos 
         disjoint_set = DisjointSet(self.n)
 
-        # Paso 4: Recorrer las aristas ordenadas y agregar las que no formen ciclos
+        # Recorrer las aristas ordenadas y agregar las que no formen ciclos
         for weight, u, v in edges:
             if disjoint_set.find(u) != disjoint_set.find(v):
                 # Añadir la arista al MST
@@ -344,6 +344,7 @@ g.add_edge(3, 4, 5.0)
 # Determinar si el grafo es conexo y, si no lo es, el número de componentes
 g.connected_components()
 """
+"""
 #Prueba KRUSKAL
 
 g = Graph(5)
@@ -363,3 +364,4 @@ print(f"El peso del Árbol de Expansión Mínima es: {mst_weight}")
 print("Las aristas en el MST son:")
 for u, v, weight in mst:
     print(f"{u} -- {v} (peso: {weight})")
+"""
