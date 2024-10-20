@@ -279,35 +279,60 @@ class Graph:
         
         return maxPaths
     
-    def kruskal_mst(self):
-        # Lista para almacenar el MST
+    # Método para obtener todas las componentes conexas
+    def get_components(self):
+        visit = [False] * self.n
+        components = []
+        for u in range(self.n):
+            if not visit[u]:
+                component = []
+                self.__DFS_collect(u, visit, component)
+                components.append(component)
+        return components
+
+    def kruskal_mst_component(self, component):
         mst = []
         mst_weight = 0
 
-        #Crear una lista de todas las aristas
+        # Lista de todas las aristas en la componente
         edges = []
-        for u in range(self.n):
+        for u in component:
             for v, weight in self.L[u]:
-                if u < v:  # Evitar duplicar aristas en grafos no dirigidos
+                if u < v and v in component:  # Evitar duplicar aristas en grafos no dirigidos
                     edges.append((weight, u, v))
 
-        # Ordenar las aristas por su peso
+        # Ordenar aristas por peso
         edges.sort()
 
-        #  Crear una estructura de conjuntos disjuntos 
+        # Crear un DisjointSet para la componente
         disjoint_set = DisjointSet(self.n)
 
-        # Recorrer las aristas ordenadas y agregar las que no formen ciclos
+        # Aplicar Kruskal para la componente
         for weight, u, v in edges:
             if disjoint_set.find(u) != disjoint_set.find(v):
-                # Añadir la arista al MST
                 mst.append((u, v, weight))
                 mst_weight += weight
-                # Unir los conjuntos de u y v
                 disjoint_set.union(u, v)
 
-        # Retornar el peso total del MST y las aristas que lo componen
         return mst_weight, mst
+
+    def kruskal_mst_all_components(self):
+        components = self.get_components()
+        total_mst_weight = 0
+        mst_per_component = []
+
+        # Calcular el MST para cada componente
+        for i, component in enumerate(components):
+            mst_weight, mst = self.kruskal_mst_component(component)
+            total_mst_weight += mst_weight
+            mst_per_component.append((mst_weight, mst))
+            print(f"Peso del MST de la componente {i + 1}: {mst_weight}")
+            print("Aristas en el MST de la componente:")
+            for u, v, weight in mst:
+                print(f"{u} -- {v} (peso: {weight})")
+
+        print(f"Peso total de los MST de todas las componentes: {total_mst_weight}")
+        return mst_per_component
     
 
 """
@@ -345,23 +370,19 @@ g.add_edge(3, 4, 5.0)
 g.connected_components()
 """
 """
-#Prueba KRUSKAL
+#PRUEBA KRUSKAL
 
-g = Graph(5)
+g = Graph(7)
 
-# Agregar aristas con pesos (u, v, peso)
-g.add_edge(0, 1, 2.0)
-g.add_edge(0, 3, 6.0)
-g.add_edge(1, 2, 3.0)
-g.add_edge(1, 3, 8.0)
-g.add_edge(1, 4, 5.0)
-g.add_edge(2, 4, 7.0)
-g.add_edge(3, 4, 9.0)
+# Agregar aristas (ejemplo de grafo con dos componentes conexas)
+g.add_edge(0, 1, 4.0)
+g.add_edge(1, 2, 6.0)
+g.add_edge(0, 2, 3.0)
 
-# Calcular el MST usando Kruskal
-mst_weight, mst = g.kruskal_mst()
-print(f"El peso del Árbol de Expansión Mínima es: {mst_weight}")
-print("Las aristas en el MST son:")
-for u, v, weight in mst:
-    print(f"{u} -- {v} (peso: {weight})")
+g.add_edge(3, 4, 5.0)
+g.add_edge(4, 5, 7.0)
+g.add_edge(3, 5, 8.0)
+
+# Calcular el MST de cada componente
+g.kruskal_mst_all_components()
 """
