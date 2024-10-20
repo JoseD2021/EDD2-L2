@@ -200,6 +200,10 @@ class Graph:
                 if not visit[i] and D[i] < min_distance:
                     min_distance = D[i]
                     v = i
+            
+            if v is None:
+                break
+
             visit[v] = True
 
             for j in self.L[v]:
@@ -210,18 +214,45 @@ class Graph:
                         D[i] = alt
                         pad[i] = v
 
-            return D, pad
+        return D, pad
+
     
-    def largestPath(self,v):
+    def longestPaths(self,v):
+        D, pad = self.dijkstra(v)
+        maxPaths = []
+        for index, distance in enumerate(D):
+            if distance == float('inf'):
+                continue
+            if len(maxPaths) < 10:
+                maxPaths.append((distance,index))
+            else: 
+                m = 0
+                for j in range(len(maxPaths)):
+                    if maxPaths[j][0] < maxPaths[m][0]:
+                        m = j
+                if distance > maxPaths[m][0]:
+                    maxPaths[m] = (distance,index)
+            
+        maxPaths.sort(reverse=True, key=lambda x: x[0])
+        return maxPaths
+    
+    def longestPathsX(self,v): # no sirve, creo, o calcula los minimos no se. No lo borro para seguir probando la logica luego
         D, pad = self.dijkstra(v)
         maxPaths = [(0,v)]
+        index = 0
         for i in D:
             minOfMax = []
             while len(maxPaths) > 0:
                 minOfMax.append(maxPaths.pop())
-                if i > minOfMax[0][0]:
-                    pass
-
+                if float("inf") > i > minOfMax[-1][0]:
+                    minOfMax.append((i,pad[index]))
+                    break
+            while len(maxPaths) < 10 and len(minOfMax) > 0:
+                maxPaths.append(minOfMax.pop())
+            index += 1
+        
+        return maxPaths
+    
 
 """
     # Crear un grafo con 5 nodos

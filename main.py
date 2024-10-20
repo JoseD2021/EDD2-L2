@@ -26,14 +26,19 @@ def searchAirport(code: str):
     try:
         airport = df[df["Source Airport Code"] == code].iloc[0]
     except:
-        return False
-    vertexCode = -1
-    for i in codes:
-        if codes[i] == code:
-            vertexCode = codes[i]
-        
-    return [airport["Source Airport Code"],airport["Source Airport Name"],airport["Source Airport City"],airport["Source Airport Country"],airport["Source Airport Latitude"], airport["Source Airport Longitude"]], vertexCode
+        try: 
+            airport = df[df["Destination Airport Code"] == code].iloc[0]
+        except:
+            return False
+        return airport["Destination Airport Code"],airport["Destination Airport Name"],airport["Destination Airport City"],airport["Destination Airport Country"],airport["Destination Airport Latitude"], airport["Destination Airport Longitude"]
+    return airport["Source Airport Code"],airport["Source Airport Name"],airport["Source Airport City"],airport["Source Airport Country"],airport["Source Airport Latitude"], airport["Source Airport Longitude"]
 
+def searchAirportCode(vertex: int):
+    vertexCode = False
+    for i in codes:
+        if codes[i] == vertex:
+            vertexCode = i
+    return vertexCode
 
 #menu
 op = -1
@@ -54,9 +59,12 @@ while op != 4:
             print("Aeropuerto no encontrado")
             continue
 
-        print(f"Informacion del aeropuerto:\nCodigo: {airportData[0][0]}\nNombre: {airportData[0][1]}\nCiudad: {airportData[0][2]}\nPais: {airportData[0][3]}\nLatitud: {airportData[0][4]}\nLongitud: {airportData[0][5]}")
-
-        # dijkstra
+        print(f"Informacion del aeropuerto:\nCodigo: {airportData[0]}\nNombre: {airportData[1]}\nCiudad: {airportData[2]}\nPais: {airportData[3]}\nLatitud: {airportData[4]}\nLongitud: {airportData[5]}\n")
+        print("Aeropuertos cuyos caminos minimos son mas largos:\n")
+        longest = g.longestPaths(codes[v1])
+        for i,path in enumerate(longest):
+            newData = searchAirport(searchAirportCode(path[1]))
+            print(f"{i+1}) Codigo: {newData[0]}, Nombre: {newData[1]}, Ciudad: {newData[2]}, Pais: {newData[3]}, Latitud: {newData[4]}, Longitud: {newData[5]}. Distancia: {path[0]}Km")
         
         op2 = input("¿Agregar otro aeropuerto para calcular el camino minimo?\n").upper().strip()
         if op2 == "SI":
