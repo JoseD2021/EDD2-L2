@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5f182f3e1e598421d663f62e5bde5cc3 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_5f182f3e1e598421d663f62e5bde5cc3" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5f182f3e1e598421d663f62e5bde5cc3 = L.map(
+                "map_5f182f3e1e598421d663f62e5bde5cc3",
+                {
+                    center: [-3.81205031, 28.22250185],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 3,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_5c90936a49dba0ff93879b1cb8d6a053 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_5c90936a49dba0ff93879b1cb8d6a053.addTo(map_5f182f3e1e598421d663f62e5bde5cc3);
+        
+    
+            var poly_line_9a4eb8664469aa6b210d35c75b537b3a = L.polyline(
+                [[15.547, -61.299999], [13.07460022, -59.49250031], [-23.43555641, -46.47305679], [-26.1392, 28.246], [-31.94029999, 115.9670029], [-23.17110062, 117.7450027]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1, "smoothFactor": 1.0, "stroke": true, "weight": 2.5}
+            ).addTo(map_5f182f3e1e598421d663f62e5bde5cc3);
+        
+    
+            var marker_4026a10d21581139ae066d01fcc72b3a = L.marker(
+                [15.547, -61.299999],
+                {}
+            ).addTo(map_5f182f3e1e598421d663f62e5bde5cc3);
+        
+    
+            var icon_7af145f1a19e6b80d6243c50b19b3e77 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "gray", "prefix": "glyphicon"}
+            );
+            marker_4026a10d21581139ae066d01fcc72b3a.setIcon(icon_7af145f1a19e6b80d6243c50b19b3e77);
+        
+    
+        var popup_bc983ea63950c0debb1a8d7a16c684c5 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3a67963177c12f5ef46b36eb09cb85dc = $(`<div id="html_3a67963177c12f5ef46b36eb09cb85dc" style="width: 100.0%; height: 100.0%;">Código:DOM   Nombre:Douglas-Charles Airport  Ciudad: Dominica  Pais: Dominica  Latitud: 15.547  Longitud: -61.299999</div>`)[0];
+                popup_bc983ea63950c0debb1a8d7a16c684c5.setContent(html_3a67963177c12f5ef46b36eb09cb85dc);
+            
+        
+
+        marker_4026a10d21581139ae066d01fcc72b3a.bindPopup(popup_bc983ea63950c0debb1a8d7a16c684c5)
+        ;
+
+        
+    
+    
+            var marker_0ff2fc836ae9d0b272d254b6cd36697d = L.marker(
+                [13.07460022, -59.49250031],
+                {}
+            ).addTo(map_5f182f3e1e598421d663f62e5bde5cc3);
+        
+    
+            var icon_9cc46d650bde88578299ecf412eab906 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "gray", "prefix": "glyphicon"}
+            );
+            marker_0ff2fc836ae9d0b272d254b6cd36697d.setIcon(icon_9cc46d650bde88578299ecf412eab906);
+        
+    
+        var popup_dfaaa751ff8ffb34c1a4ed5e2e28325b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c90725b7649772f8ce0394538e0ea6a8 = $(`<div id="html_c90725b7649772f8ce0394538e0ea6a8" style="width: 100.0%; height: 100.0%;">Código:BGI   Nombre:Sir Grantley Adams International Airport  Ciudad: Bridgetown  Pais: Barbados  Latitud: 13.07460022  Longitud: -59.49250031</div>`)[0];
+                popup_dfaaa751ff8ffb34c1a4ed5e2e28325b.setContent(html_c90725b7649772f8ce0394538e0ea6a8);
+            
+        
+
+        marker_0ff2fc836ae9d0b272d254b6cd36697d.bindPopup(popup_dfaaa751ff8ffb34c1a4ed5e2e28325b)
+        ;
+
+        
+    
+    
+            var marker_aa122293f1d984b618906e3eae4f7953 = L.marker(
+                [-23.43555641, -46.47305679],
+                {}
+            ).addTo(map_5f182f3e1e598421d663f62e5bde5cc3);
+        
+    
+            var icon_aa28fd846d3a30362712f1d4978e6d1e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "gray", "prefix": "glyphicon"}
+            );
+            marker_aa122293f1d984b618906e3eae4f7953.setIcon(icon_aa28fd846d3a30362712f1d4978e6d1e);
+        
+    
+        var popup_29481f903fa163e19e5a8bd3acfd5acb = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ef05cfc82d0f0535fbff879dda7d9607 = $(`<div id="html_ef05cfc82d0f0535fbff879dda7d9607" style="width: 100.0%; height: 100.0%;">Código:GRU   Nombre:Guarulhos - Governador André Franco Montoro International Airport  Ciudad: Sao Paulo  Pais: Brazil  Latitud: -23.43555641  Longitud: -46.47305679</div>`)[0];
+                popup_29481f903fa163e19e5a8bd3acfd5acb.setContent(html_ef05cfc82d0f0535fbff879dda7d9607);
+            
+        
+
+        marker_aa122293f1d984b618906e3eae4f7953.bindPopup(popup_29481f903fa163e19e5a8bd3acfd5acb)
+        ;
+
+        
+    
+    
+            var marker_b7b41cb60978fa8f1fef68ce0df2deae = L.marker(
+                [-26.1392, 28.246],
+                {}
+            ).addTo(map_5f182f3e1e598421d663f62e5bde5cc3);
+        
+    
+            var icon_dffe10020d60d1b69405dbf47383dd0b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "gray", "prefix": "glyphicon"}
+            );
+            marker_b7b41cb60978fa8f1fef68ce0df2deae.setIcon(icon_dffe10020d60d1b69405dbf47383dd0b);
+        
+    
+        var popup_b27ba962de9a05e3111811d9b842484d = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2290c3fec162d7426801b52c57295a09 = $(`<div id="html_2290c3fec162d7426801b52c57295a09" style="width: 100.0%; height: 100.0%;">Código:JNB   Nombre:OR Tambo International Airport  Ciudad: Johannesburg  Pais: South Africa  Latitud: -26.1392  Longitud: 28.246</div>`)[0];
+                popup_b27ba962de9a05e3111811d9b842484d.setContent(html_2290c3fec162d7426801b52c57295a09);
+            
+        
+
+        marker_b7b41cb60978fa8f1fef68ce0df2deae.bindPopup(popup_b27ba962de9a05e3111811d9b842484d)
+        ;
+
+        
+    
+    
+            var marker_857a61f8f2fadf715d8f8e9a6ae7b9b7 = L.marker(
+                [-31.94029999, 115.9670029],
+                {}
+            ).addTo(map_5f182f3e1e598421d663f62e5bde5cc3);
+        
+    
+            var icon_ea27cd2cb385b94307d39270bcec09f1 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "gray", "prefix": "glyphicon"}
+            );
+            marker_857a61f8f2fadf715d8f8e9a6ae7b9b7.setIcon(icon_ea27cd2cb385b94307d39270bcec09f1);
+        
+    
+        var popup_581359a023d75a6fbfd30fb718d89bca = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_a5a72fd7acab6a1b65909a23fcabfe74 = $(`<div id="html_a5a72fd7acab6a1b65909a23fcabfe74" style="width: 100.0%; height: 100.0%;">Código:PER   Nombre:Perth International Airport  Ciudad: Perth  Pais: Australia  Latitud: -31.94029999  Longitud: 115.9670029</div>`)[0];
+                popup_581359a023d75a6fbfd30fb718d89bca.setContent(html_a5a72fd7acab6a1b65909a23fcabfe74);
+            
+        
+
+        marker_857a61f8f2fadf715d8f8e9a6ae7b9b7.bindPopup(popup_581359a023d75a6fbfd30fb718d89bca)
+        ;
+
+        
+    
+    
+            var marker_1548697497a83398a6125fac9102b5c2 = L.marker(
+                [-23.17110062, 117.7450027],
+                {}
+            ).addTo(map_5f182f3e1e598421d663f62e5bde5cc3);
+        
+    
+            var icon_cce258608d933befdc2bde5b252865f3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "gray", "prefix": "glyphicon"}
+            );
+            marker_1548697497a83398a6125fac9102b5c2.setIcon(icon_cce258608d933befdc2bde5b252865f3);
+        
+    
+        var popup_cbf32818cc8e84737daffae873820f82 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3a0653b5cb26286eeec51e97ef1daefa = $(`<div id="html_3a0653b5cb26286eeec51e97ef1daefa" style="width: 100.0%; height: 100.0%;">Código:PBO   Nombre:Paraburdoo Airport  Ciudad: Paraburdoo  Pais: Australia  Latitud: -23.17110062  Longitud: 117.7450027</div>`)[0];
+                popup_cbf32818cc8e84737daffae873820f82.setContent(html_3a0653b5cb26286eeec51e97ef1daefa);
+            
+        
+
+        marker_1548697497a83398a6125fac9102b5c2.bindPopup(popup_cbf32818cc8e84737daffae873820f82)
+        ;
+
+        
+    
+    
+            var marker_0dd92ded081dc4f1fd8e034c6136e6ea = L.marker(
+                [15.547, -61.299999],
+                {}
+            ).addTo(map_5f182f3e1e598421d663f62e5bde5cc3);
+        
+    
+            var icon_6241fb145cccef0476d1946cc31e2bf7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_0dd92ded081dc4f1fd8e034c6136e6ea.setIcon(icon_6241fb145cccef0476d1946cc31e2bf7);
+        
+    
+        var popup_9600c7a6b68f6b8c5b98ca21851bbe91 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_289cb9ff52f0870ddc0eb269ebb125a1 = $(`<div id="html_289cb9ff52f0870ddc0eb269ebb125a1" style="width: 100.0%; height: 100.0%;">Código:DOM   Nombre:Douglas-Charles Airport  Ciudad: Dominica  Pais: Dominica  Latitud: 15.547  Longitud: -61.299999</div>`)[0];
+                popup_9600c7a6b68f6b8c5b98ca21851bbe91.setContent(html_289cb9ff52f0870ddc0eb269ebb125a1);
+            
+        
+
+        marker_0dd92ded081dc4f1fd8e034c6136e6ea.bindPopup(popup_9600c7a6b68f6b8c5b98ca21851bbe91)
+        ;
+
+        
+    
+    
+            var marker_928df68ac3f30ae2e667e1e1d35c1e05 = L.marker(
+                [-23.17110062, 117.7450027],
+                {}
+            ).addTo(map_5f182f3e1e598421d663f62e5bde5cc3);
+        
+    
+            var icon_94b66e757b291ed4910f38a7819675dd = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_928df68ac3f30ae2e667e1e1d35c1e05.setIcon(icon_94b66e757b291ed4910f38a7819675dd);
+        
+    
+        var popup_b578b015843f23a066a695112fa34d5d = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_8ac02ba5ed055246be44f1d05cf63a9b = $(`<div id="html_8ac02ba5ed055246be44f1d05cf63a9b" style="width: 100.0%; height: 100.0%;">Código:PBO   Nombre:Paraburdoo Airport  Ciudad: Paraburdoo  Pais: Australia  Latitud: -23.17110062  Longitud: 117.7450027</div>`)[0];
+                popup_b578b015843f23a066a695112fa34d5d.setContent(html_8ac02ba5ed055246be44f1d05cf63a9b);
+            
+        
+
+        marker_928df68ac3f30ae2e667e1e1d35c1e05.bindPopup(popup_b578b015843f23a066a695112fa34d5d)
+        ;
+
+        
+    
+</script>
+</html>

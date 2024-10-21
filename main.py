@@ -1,6 +1,7 @@
 from Graph import Graph
 import pandas as pd
 import time
+import folium
 
 
 inicio = time.time() #debug
@@ -70,5 +71,70 @@ while op != 4:
         op2 = input("¿Agregar otro aeropuerto para calcular el camino minimo?\n").upper().strip()
         if op2 == "SI":
             v2 = input("Ingrese codigo de aeropuerto: ").upper().strip()
+            airportData1 = searchAirport(v2)
+
+            # Si no lo encuentra
+            if not airportData1:
+                print("Aeropuerto no encontrado")
+                continue
+
+            dis, pad = g.dijkstra(codes[v1])
+            # Mensaje en caso de que no sean de la misma componente
+            if dis[codes[v2]] == float('inf'):
+                print(f"No hay un camino disponible desde {v1} hasta {v2}.")
+            else:
+                # Hace el camino usando los predecesores
+                path = []
+                current = codes[v2]
+                while current is not None:
+                    path.append(current)
+                    current = pad[current]
+
+                # Invertimos el camino
+                path.reverse()
+
+                # Muestra el camino y la distancia
+                print(f"Camino mínimo desde {v1} hasta {v2}:")
+                for vertex in path:
+                    airport = searchAirport(searchAirportCode(vertex))
+                    print(f"Codigo: {airport[0]}, Nombre: {airport[1]}, Ciudad: {airport[2]}, Pais: {airport[3]}, Latitud: {airport[4]}, Longitud: {airport[5]}")
+
+                print(f"Distancia total: {dis[codes[v2]]} Km")
+                
+                # Graficar el camino mínimo
+                m = folium.Map(location=[(airportData[4] + airportData1[4]) / 2, (airportData[5] + airportData1[5]) / 2], zoom_start=3)
+
+
+
+                # Marca las rutas
+                points = [(searchAirport(searchAirportCode(vertex))[4], searchAirport(searchAirportCode(vertex))[5]) for vertex in path]
+                folium.PolyLine(points, color='orange', weight=2.5, opacity=1).add_to(m)
+
+                # Agregar marcadores para los vértices intermedios
+                for vertex in path:
+                    airport = searchAirport(searchAirportCode(vertex))
+                    folium.Marker(
+                        location=[airport[4], airport[5]],
+                    popup=f"Código:{airport[0]} \n Nombre:{airport[1]}\n Ciudad: {airport[2]}\n Pais: {airport[3]}\n Latitud: {airport[4]}\n Longitud: {airport[5]}",
+                        icon=folium.Icon(color='gray')
+                    ).add_to(m)
+                # Marcamos el aeropuerto inicial
+                folium.Marker(
+                    location=[airportData[4], airportData[5]],
+                    popup=f"Código:{airportData[0]} \n Nombre:{airportData[1]}\n Ciudad: {airportData[2]}\n Pais: {airportData[3]}\n Latitud: {airportData[4]}\n Longitud: {airportData[5]}",
+                    icon=folium.Icon(color='blue')
+                ).add_to(m)
+                
+                # Marcam el aeropuerto de final
+                folium.Marker(
+                    location=[airportData1[4], airportData1[5]],
+                    popup=f"Código:{airportData1[0]} \n Nombre:{airportData1[1]}\n Ciudad: {airportData1[2]}\n Pais: {airportData1[3]}\n Latitud: {airportData1[4]}\n Longitud: {airportData1[5]}",
+                    icon=folium.Icon(color='green')
+                ).add_to(m)
+
+                # Guarda el mapa en un archivo HTML
+                m.save("Map.html")
+                print("Mapa guardado como Map.html")
+            
 
 
