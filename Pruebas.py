@@ -31,7 +31,9 @@ def searchAirportCode(vertex: int):
             vertexCode = i
     return vertexCode
 
-print(searchAirportCode(0))
+print(searchAirportCode(906))
+print(searchAirportCode(1270))
+
 
 #g.connected_components()
 #print(g.dijkstra(120)[1])

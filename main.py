@@ -1,10 +1,7 @@
 from Graph import Graph
 import pandas as pd
-import time
 import folium
 
-
-inicio = time.time() #debug
 # Carga de datos csv to graph
 df = pd.read_csv("flights_final.csv")
 codes = {} # Registro clave = Int vertice, Valor = Airport Code
@@ -20,8 +17,6 @@ g = Graph(len(codes))
 for _,e in df.iterrows(): # recorre cada fila del csv
     # Agrega todas las aristas
     g.add_edge(codes[e["Source Airport Code"]], codes[e["Destination Airport Code"]], g.calcDistance(e["Source Airport Latitude"],e["Source Airport Longitude"],e["Destination Airport Latitude"],e["Destination Airport Longitude"]))
-fin = time.time()
-print(fin-inicio,"seg")
 
 def searchAirport(code: str):
     try:
@@ -51,7 +46,7 @@ while op != 4:
     if op == 1:
         g.connected_components()
     elif op == 2:
-        print("Arbol de expansion minima del grafo:")
+        print("Peso del arbol de expansion minima del grafo:")
         g.kruskal_mst_all_components()
     elif op == 3:
         v1 = input("Ingrese codigo de aeropuerto: ").upper().strip()
@@ -68,7 +63,7 @@ while op != 4:
             newData = searchAirport(searchAirportCode(path[1]))
             print(f"{i+1}) Codigo: {newData[0]}, Nombre: {newData[1]}, Ciudad: {newData[2]}, Pais: {newData[3]}, Latitud: {newData[4]}, Longitud: {newData[5]}. Distancia: {path[0]}Km")
         
-        op2 = input("¿Agregar otro aeropuerto para calcular el camino minimo?\n").upper().strip()
+        op2 = input("¿Agregar otro aeropuerto para calcular el camino minimo? si/no\n").upper().strip()
         if op2 == "SI":
             v2 = input("Ingrese codigo de aeropuerto: ").upper().strip()
             airportData1 = searchAirport(v2)
@@ -135,6 +130,3 @@ while op != 4:
                 # Guarda el mapa en un archivo HTML
                 m.save("Map.html")
                 print("Mapa guardado como Map.html")
-            
-
-
