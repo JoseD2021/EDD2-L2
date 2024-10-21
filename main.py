@@ -130,3 +130,4 @@ while op != 4:
                 # Guarda el mapa en un archivo HTML
                 m.save("Map.html")
                 print("Mapa guardado como Map.html")
+                print("Nodo inicial: Azul. Nodo final: Verde")
