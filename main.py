@@ -18,7 +18,7 @@ for _,e in df.iterrows(): # recorre cada fila del csv
 g = Graph(len(codes))
 for _,e in df.iterrows(): # recorre cada fila del csv
     # Agrega todas las aristas
-    g.add_edge(codes[e["Source Airport Code"]], codes[e["Destination Airport Code"]], g.calcDistance(e["Source Airport Longitude"],e["Source Airport Latitude"],e["Destination Airport Longitude"],e["Destination Airport Latitude"]))
+    g.add_edge(codes[e["Source Airport Code"]], codes[e["Destination Airport Code"]], g.calcDistance(e["Source Airport Latitude"],e["Source Airport Longitude"],e["Destination Airport Latitude"],e["Destination Airport Longitude"]))
 fin = time.time()
 print(fin-inicio,"seg")
 
@@ -43,14 +43,15 @@ def searchAirportCode(vertex: int):
 #menu
 op = -1
 while op != 4:
-    op = input("Seleccione una opcion:\n    1. Determinar si el grafo generado es conexo.\n    2. Determinar el peso del árbol de expansión mínima.\n    3. Buscar aeropuerto.\n    4. Salir\n")
+    op = input("\nSeleccione una opcion:\n    1. Determinar si el grafo generado es conexo.\n    2. Determinar el peso del árbol de expansión mínima.\n    3. Buscar aeropuerto.\n    4. Salir\n")
     try: op = int(op)
     except: continue
 
     if op == 1:
         g.connected_components()
     elif op == 2:
-        pass
+        print("Arbol de expansion minima del grafo:")
+        g.kruskal_mst_all_components()
     elif op == 3:
         v1 = input("Ingrese codigo de aeropuerto: ").upper().strip()
         airportData = searchAirport(v1)

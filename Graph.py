@@ -206,12 +206,13 @@ class Graph:
         # Retornar el peso total del MST
         return mst_weight
     def calcDistance(self,lat1,long1,lat2,long2): # Fórmula del Haversine
-            lat = lat2 - lat1
-            long = long2 - long1
-            a = math.sin(lat/2)**2 + math.cos(lat1)*math.cos(lat2)*(math.sin(long/2)**2)
-            c = 2*math.atan2(math.sqrt(a),math.sqrt(1-a))
-            d = self.R*c
-            return d
+        lat1, long1, lat2, long2 = map(math.radians, [lat1, long1, lat2, long2])
+        lat = lat2 - lat1
+        long = long2 - long1
+        a = math.sin(lat/2)**2 + math.cos(lat1)*math.cos(lat2)*(math.sin(long/2)**2)
+        c = 2*math.atan2(math.sqrt(a),math.sqrt(1-a))
+        d = self.R*c
+        return d
 
     def dijkstra(self, v0):
         D = [float("inf")] * self.n
@@ -326,10 +327,10 @@ class Graph:
             mst_weight, mst = self.kruskal_mst_component(component)
             total_mst_weight += mst_weight
             mst_per_component.append((mst_weight, mst))
-            print(f"Peso del MST de la componente {i + 1}: {mst_weight}")
-            print("Aristas en el MST de la componente:")
-            for u, v, weight in mst:
-                print(f"{u} -- {v} (peso: {weight})")
+            print(f"Peso del MST de la componente {i + 1}: {round(mst_weight,2)}")
+            #print("Aristas en el MST de la componente:")
+            #for u, v, weight in mst:
+            #    print(f"{u} -- {v} (peso: {weight})")
 
         print(f"Peso total de los MST de todas las componentes: {total_mst_weight}")
         return mst_per_component
