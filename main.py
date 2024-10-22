@@ -18,6 +18,19 @@ for _,e in df.iterrows(): # recorre cada fila del csv
     # Agrega todas las aristas
     g.add_edge(codes[e["Source Airport Code"]], codes[e["Destination Airport Code"]], g.calcDistance(e["Source Airport Latitude"],e["Source Airport Longitude"],e["Destination Airport Latitude"],e["Destination Airport Longitude"]))
 
+def todo():
+    m = folium.Map()
+    for vertex in codes:
+        # print(vertex)
+        airport = searchAirport(vertex)
+        folium.Marker(
+            location=[airport[4], airport[5]],
+        popup=f"Código:{airport[0]} \n Nombre:{airport[1]}\n Ciudad: {airport[2]}\n Pais: {airport[3]}\n Latitud: {airport[4]}\n Longitud: {airport[5]}",
+            icon=folium.Icon(color='gray')
+        ).add_to(m)
+    m.save("Map.html")
+    print("Mapa guardado como Map.html")
+
 def searchAirport(code: str):
     try:
         airport = df[df["Source Airport Code"] == code].iloc[0]
@@ -38,8 +51,8 @@ def searchAirportCode(vertex: int):
 
 #menu
 op = -1
-while op != 4:
-    op = input("\nSeleccione una opcion:\n    1. Determinar si el grafo generado es conexo.\n    2. Determinar el peso del árbol de expansión mínima.\n    3. Buscar aeropuerto.\n    4. Salir\n")
+while op != 5:
+    op = input("\nSeleccione una opcion:\n    1. Determinar si el grafo generado es conexo.\n    2. Determinar el peso del árbol de expansión mínima.\n    3. Buscar aeropuerto.\n    4. Mostrar todos los aeropuertos.\n    5. Salir\n")
     try: op = int(op)
     except: continue
 
@@ -131,3 +144,5 @@ while op != 4:
                 m.save("Map.html")
                 print("Mapa guardado como Map.html")
                 print("Nodo inicial: Azul. Nodo final: Verde")
+    elif op == 4:
+        todo()
